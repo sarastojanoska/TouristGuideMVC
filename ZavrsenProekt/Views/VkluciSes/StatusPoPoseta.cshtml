@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ZavrsenProekt.Models.VkluciSe>
+@{
+    @ViewData["Title"]
+}
+<h3>Moja Poseta</h3>
+<form asp-controller="VkluciSes" asp-action="StatusPoPoseta"></form>
+<table class="table">
+    <thead>
+    <th>Poseta</th>
+    <th>DatumPoseta</th>
+    <th>ZnamenitostUrl</th>
+    <th>PosetaUrl</th>
+    <th>BrojKartica</th>
+    <th>CVC</th>
+    <th>ValidateDate</th>
+    <th>Komentar</th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a asp-controller="Posetas" asp-action="Details" asp-route-id="@item.PosetaId">
+                    @Html.DisplayFor(modelItem => item.Poseta.Ime)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Poseta.DatumPoseta)
+            </td>
+            <td>
+                @item.ZnamenitostUrl
+            </td>
+            <td>
+                @item.PosetaUrl
+            </td>
+            <td>
+                @item.BrojKartica
+            </td>
+            <td>
+                @item.CVC
+            </td>
+            <td>
+                @item.ValidnostData
+            </td>
+            <td>
+                @item.Poseta.Komentar
+            </td>
+            <td>
+                <a asp-controller="VkluciSes" asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+            <td>
+                <a asp-controller="VkluciSes" asp-action="EditStatusPoPoseta" asp-route-id="@item.Id">Edit</a>
+            </td>
+        </tr>
+    }
+        </tbody>
+    </table>

@@ -1,0 +1,54 @@
+﻿@model ZavrsenProekt.ViewModels.MoiPosetiTurist
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Turist</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Turist.Id" />
+            <div class="form-group">
+                <label asp-for="Turist.PassportId" class="control-label"></label>
+                <input asp-for="Turist.PassportId" class="form-control" />
+                <span asp-validation-for="Turist.PassportId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Turist.Ime" class="control-label"></label>
+                <input asp-for="Turist.Ime" class="form-control" />
+                <span asp-validation-for="Turist.Ime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Turist.Prezime" class="control-label"></label>
+                <input asp-for="Turist.Prezime" class="form-control" />
+                <span asp-validation-for="Turist.Prezime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Turist.DatumPrijava" class="control-label"></label>
+                <input asp-for="Turist.DatumPrijava" class="form-control" />
+                <span asp-validation-for="Turist.DatumPrijava" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js">
+    </script>
+    <script>$(document).ready(function() {$("#SelectedTuristi").select2();});</script>
+}

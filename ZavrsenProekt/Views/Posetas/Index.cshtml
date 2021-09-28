@@ -1,0 +1,93 @@
+﻿@model ZavrsenProekt.ViewModels.PosetaFilterViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Posetas" asp-action="Index" method="get">
+    <p>
+        <select asp-for="ImePoseta" asp-items="Model.Iminja">
+            <option value="">All</option>
+        </select>
+        <select asp-for="ZnamenitostPoseta" asp-items="Model.Znamenitosti">
+            <option value="">All</option>
+        </select>
+        Ime: <input type="text" asp-for="SearchString"/>
+        Znamenitost:<input type="text" asp-for="SearchString1"/>
+        <input type="submit" value="Filter"/>
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Poseti[0].Ime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poseti[0].Znamenitost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poseti[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poseti[0].Komentar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poseti[0].DatumPoseta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poseti[0].TuristickiVodic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poseti[0].Turisti)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Poseti) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Znamenitost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Komentar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumPoseta)
+            </td>
+            <td>
+                @if(item.TuristickiVodicId != null)
+                {
+                    <a asp-controller="TuristickiVodics" asp-action="Details" asp-route-id="@item.TuristickiVodicId">@Html.DisplayFor(modelItem => item.TuristickiVodic.FullName)</a>
+                }
+            </td>
+            <td>
+                @foreach (var turist in item.Turisti)
+                {
+                    <a asp-controller="Turists" asp-action="Details" asp-route-id="@turist.TouristId"> @turist.Turist.FullName</a>
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-controller="VkluciSes" asp-action="VkluciTuristi" asp-route-id="@item.Id">Vkluci Turisti</a> |
+                <a asp-controller="VkluciSes" asp-action="OdjaviTuristi" asp-route-id="@item.Id">Odjavi Turisti</a> |
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

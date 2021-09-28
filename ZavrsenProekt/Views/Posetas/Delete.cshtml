@@ -1,0 +1,67 @@
+﻿@model ZavrsenProekt.Models.Poseta
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Poseta</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Znamenitost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Znamenitost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Komentar)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Komentar)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DatumPoseta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DatumPoseta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TuristickiVodic)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.TuristickiVodicId != null)
+            {
+                <a asp-controller="TuristickiVodics" asp-action="Details" asp-route-id="@Model.TuristickiVodicId">@Html.DisplayFor(model => model.TuristickiVodic.FullName)</a>
+            }
+        </dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Turisti)</dt>
+        <dd class="col-sm-10">
+            @foreach (var turist in Model.Turisti)
+            {
+                <a asp-controller="Turists" asp-action="Details" asp-route-id="@turist.TouristId">@turist.Turist.FullName</a><br />
+            }
+    </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

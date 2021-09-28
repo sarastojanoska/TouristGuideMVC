@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ZavrsenProekt.Models.VkluciSe>
+@{
+    @ViewData["Title"]
+}
+<h3>Turisti vo posetata</h3>
+<form asp-controller="VkluciSes" asp-action="MoiTuristiPoPoseta"></form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Turist</th>
+            <th>DataUplata</th>
+            <th>DatumPrijava</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Turists" asp-action="Details" asp-route-id="@item.TouristId">
+
+                        @Html.DisplayFor(modelItem => item.Turist.FullName)
+
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentDate)
+                </td>
+                <td>
+                    @item.Turist.DatumPrijava
+                </td>
+                <td>
+                    <a asp-controller="VkluciSes" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

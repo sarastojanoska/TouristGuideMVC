@@ -1,0 +1,68 @@
+﻿@model ZavrsenProekt.ViewModels.VodicFilterViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="TuristickiVodics" asp-action="Index" method="get">
+    <p>
+        <select asp-for="Obrazovanie" asp-items="Model.Obrazovanie">
+            <option value="">All</option>
+        </select>
+        Ime: <input type="text" asp-for="Ime"/>
+        Prezime: <input type="text" asp-for="Prezime"/>
+        <input type="submit" value="Filter"/>
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TuristickiVodic[0].Ime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TuristickiVodic[0].Prezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TuristickiVodic[0].Obrazovanie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TuristickiVodic[0].Poseta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TuristickiVodic) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Obrazovanie)
+            </td>
+            <td>
+                @foreach(var poseta in item.Poseta)
+                {
+                    <a asp-controller="Posetas" asp-action="Details" asp-route-id="@poseta.Id">@poseta.Ime</a> <br />
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>|
+                <a asp-controller="VkluciSes" asp-action="MoiTuristiPoPoseta" asp-route-id="@item.Id">See Turists</a><br />|
+                <a asp-action="UploadPic" asp-route-id="@item.Id">Upload My Pic</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
